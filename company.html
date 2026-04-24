@@ -156,7 +156,7 @@ section { padding: 100px 80px; }
 
 /* CONTACT */
 #contact { background: var(--midnight); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 48px; }
+.contact-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 48px; max-width: 700px; }
 .contact-info { display: flex; flex-direction: column; gap: 28px; }
 .contact-item { display: flex; gap: 18px; align-items: flex-start; }
 .contact-icon { width: 48px; height: 48px; border-radius: 14px; background: rgba(0,200,232,0.1); border: 1px solid rgba(0,200,232,0.2); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
@@ -230,7 +230,7 @@ footer { background: #060D1A; border-top: 1px solid var(--border); padding: 60px
     <a href="product.html">Product</a>
     <a href="services.html">Services</a>
     <a href="company.html" class="active">Company</a>
-    <a href="#contact" class="nav-cta">Contact Us</a>
+    <a href="mailto:sales@corelayersecurity.ai?subject=Enquiry — CoreLayer AI Security" class="nav-cta">Contact Us</a>
   </div>
 </nav>
 
@@ -423,62 +423,36 @@ footer { background: #060D1A; border-top: 1px solid var(--border); padding: 60px
   <div class="section-eyebrow">Partner Programme</div>
   <h2 class="section-title">Build the future of AI security with us</h2>
   <p style="font-size:16px;color:var(--slate);max-width:700px;line-height:1.7;">CoreLayer is building a global ecosystem of technology partners, channel partners, and integration partners to deliver AI security at enterprise scale.</p>
-  <div class="partners-grid">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px;">
+    <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;padding:32px 28px;">
+      <span style="font-size:28px;display:block;margin-bottom:14px;">📈</span>
+      <h3 style="font-size:17px;font-weight:700;margin-bottom:10px;">The fastest-growing segment in cybersecurity</h3>
+      <p style="font-size:14px;color:var(--slate);line-height:1.7;">AI security is not a niche — it is becoming the most urgent layer of enterprise risk. Every enterprise deploying LLMs, copilots, and autonomous agents is creating a new attack surface that traditional security tools were never designed to protect. Partners who establish AI security practices today will own that relationship as the market matures.</p>
+    </div>
+    <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;padding:32px 28px;">
+      <span style="font-size:28px;display:block;margin-bottom:14px;">🎯</span>
+      <h3 style="font-size:17px;font-weight:700;margin-bottom:10px;">A genuinely differentiated solution</h3>
+      <p style="font-size:14px;color:var(--slate);line-height:1.7;">CoreLayer is the only platform that covers all five phases of AI security — Build, Test, Validate, Runtime, and End User — in a single unified intelligence suite. No competitor addresses the full lifecycle. Partners gain a solution that is impossible to replace with a combination of existing point tools, creating durable customer retention.</p>
+    </div>
+    <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;padding:32px 28px;">
+      <span style="font-size:28px;display:block;margin-bottom:14px;">🤝</span>
+      <h3 style="font-size:17px;font-weight:700;margin-bottom:10px;">Early partner advantage</h3>
+      <p style="font-size:14px;color:var(--slate);line-height:1.7;">We are at the beginning of building our partner ecosystem. Partners who join now gain preferred positioning, dedicated co-selling support, joint go-to-market access, and the opportunity to shape the programme itself. Early movers in emerging security categories consistently outperform late entrants — this is that window.</p>
+    </div>
+    <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;padding:32px 28px;">
+      <span style="font-size:28px;display:block;margin-bottom:14px;">🔗</span>
+      <h3 style="font-size:17px;font-weight:700;margin-bottom:10px;">Platform-integrated, not siloed</h3>
+      <p style="font-size:14px;color:var(--slate);line-height:1.7;">Technology partners benefit from CoreLayer's open integration architecture — SIEM, SOAR, EDR, NDR, cloud platforms, and AI vendors can build on our APIs to extend their own products. Service partners get a platform that amplifies every engagement with tooling their team can deploy and leave running — creating recurring value beyond the project.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:48px;background:linear-gradient(135deg,rgba(0,200,232,0.07),rgba(123,94,248,0.07));border:1px solid rgba(0,200,232,0.2);border-radius:20px;padding:48px;display:flex;align-items:center;justify-content:space-between;gap:40px;">
     <div>
-      <div class="partner-tiers">
-        <div class="partner-tier">
-          <div class="pt-icon pt-gold">🥇</div>
-          <div>
-            <div class="pt-name">Gold Partner</div>
-            <div class="pt-desc">Strategic resellers and system integrators with dedicated co-selling, joint go-to-market, and priority support for enterprise deals. Includes MDF allocation, co-branded marketing, and dedicated partner success management.</div>
-          </div>
-        </div>
-        <div class="partner-tier">
-          <div class="pt-icon pt-silver">🥈</div>
-          <div>
-            <div class="pt-name">Silver Partner</div>
-            <div class="pt-desc">Registered resellers and VARs with access to partner portal, sales training, deal registration programme, and technical enablement resources.</div>
-          </div>
-        </div>
-        <div class="partner-tier">
-          <div class="pt-icon pt-tech">🔗</div>
-          <div>
-            <div class="pt-name">Technology Partner</div>
-            <div class="pt-desc">ISV and platform integrations — SIEM, SOAR, NDR, EDR, cloud providers, and AI platform vendors building on CoreLayer's APIs. Technical integration support and joint go-to-market available.</div>
-          </div>
-        </div>
-      </div>
-      <div class="why-partner">
-        <h4>Why partner with CoreLayer?</h4>
-        <p>AI security is the fastest-growing segment in cybersecurity. CoreLayer's full-lifecycle platform addresses a gap no single existing vendor fills — giving partners a genuinely differentiated solution to bring to enterprise customers and prospects. Early partners gain preferred positioning as the market matures.</p>
-      </div>
+      <h3 style="font-size:22px;font-weight:700;margin-bottom:10px;">Interested in partnering with CoreLayer?</h3>
+      <p style="font-size:14px;color:var(--slate);max-width:540px;line-height:1.7;">We would love to explore what a partnership could look like for your organisation. Whether you are a system integrator, a managed security provider, a VAR, or a technology platform — reach out to our team directly and let's start the conversation.</p>
     </div>
-    <div class="partner-form-panel">
-      <h3>Register as a Partner</h3>
-      <p>Tell us about your organisation and the type of partnership you are interested in. Our team will be in touch within 48 hours.</p>
-      <div class="form-row">
-        <div class="form-group"><label>Company Name</label><input type="text" placeholder="Your company"></div>
-        <div class="form-group"><label>Contact Name</label><input type="text" placeholder="Your full name"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Business Email</label><input type="email" placeholder="you@company.com"></div>
-        <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 / +1..."></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group form-full"><label>Partnership Type</label>
-          <select>
-            <option>Gold Partner</option>
-            <option>Silver Partner</option>
-            <option>Technology Integration Partner</option>
-            <option>Other</option>
-          </select>
-        </div>
-      </div>
-      <button class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;"
-        onclick="window.location.href='mailto:partners@corelayersecurity.ai?subject=Partner Application — CoreLayer AI Security'">
-        Submit Partner Application →
-      </button>
-    </div>
+    <a href="mailto:sales@corelayersecurity.ai?subject=Partnership Enquiry — CoreLayer AI Security" class="btn-primary" style="flex-shrink:0;">Get in Touch →</a>
   </div>
 </section>
 
@@ -497,59 +471,11 @@ footer { background: #060D1A; border-top: 1px solid var(--border); padding: 60px
         </div>
       </div>
       <div class="contact-item">
-        <div class="contact-icon">🛠</div>
-        <div>
-          <h4>Technical Support</h4>
-          <a href="mailto:support@corelayersecurity.ai">support@corelayersecurity.ai</a>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">🤝</div>
-        <div>
-          <h4>Partnerships</h4>
-          <a href="mailto:partners@corelayersecurity.ai">partners@corelayersecurity.ai</a>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">💼</div>
-        <div>
-          <h4>Careers</h4>
-          <a href="mailto:careers@corelayersecurity.ai">careers@corelayersecurity.ai</a>
-        </div>
-      </div>
-      <div class="contact-item">
         <div class="contact-icon">📍</div>
         <div>
-          <h4>Office</h4>
+          <h4>Located at</h4>
           <p>IT Express Way, OMR<br>Chennai, India</p>
         </div>
-      </div>
-    </div>
-    <div class="contact-form-panel">
-      <h3>Send us a message</h3>
-      <p>Fill in the form and we will respond within one business day.</p>
-      <div class="contact-form">
-        <input type="text" placeholder="Full Name">
-        <input type="email" placeholder="Business Email">
-        <input type="tel" placeholder="Phone Number">
-        <input type="text" placeholder="Company Name">
-        <select>
-          <option value="">Area of Interest</option>
-          <option>Platform Demo</option>
-          <option>AI Red Teaming</option>
-          <option>Architecture Review</option>
-          <option>Compliance & Governance</option>
-          <option>Vulnerability Assessment</option>
-          <option>Managed AI Security</option>
-          <option>Partnership</option>
-          <option>Careers</option>
-          <option>Other</option>
-        </select>
-        <textarea placeholder="Tell us about your AI security requirements or question..."></textarea>
-        <button class="btn-primary" style="justify-content:center;"
-          onclick="window.location.href='mailto:sales@corelayersecurity.ai?subject=Website Enquiry — CoreLayer AI Security'">
-          Send Message →
-        </button>
       </div>
     </div>
   </div>
