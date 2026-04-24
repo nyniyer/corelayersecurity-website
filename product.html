@@ -913,12 +913,109 @@ footer { background: #060D1A; border-top: 1px solid var(--border); padding: 60px
   <div class="footer-bottom">
     <div class="footer-copy">© 2026 CoreLayer AI Security. All rights reserved.</div>
     <div class="footer-legal">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#">Security</a>
+      <a href="#" onclick="openModal('privacy');return false;">Privacy</a>
+      <a href="#" onclick="openModal('terms');return false;">Terms</a>
+      <a href="#" onclick="openModal('security');return false;">Security</a>
     </div>
   </div>
 </footer>
+
+<!-- MODALS -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:2000;backdrop-filter:blur(6px);"></div>
+
+<div id="modal-box" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2001;width:min(720px,92vw);max-height:80vh;background:#0F2040;border:1px solid rgba(0,200,232,0.2);border-radius:20px;overflow:hidden;display:none;flex-direction:column;">
+  <div style="padding:28px 36px 20px;border-bottom:1px solid rgba(0,200,232,0.1);display:flex;justify-content:space-between;align-items:center;">
+    <div id="modal-title" style="font-size:20px;font-weight:700;"></div>
+    <button onclick="closeModal()" style="background:none;border:none;color:#8BAED4;font-size:22px;cursor:pointer;line-height:1;">&#x2715;</button>
+  </div>
+  <div id="modal-body" style="padding:28px 36px 36px;overflow-y:auto;font-size:14px;color:#C8D8F0;line-height:1.8;"></div>
+</div>
+
+<script>
+const modalContent = {
+  privacy: {
+    title: "Privacy Policy",
+    body: `
+      <p style="color:#8BAED4;font-size:12px;margin-bottom:24px;">Effective Date: 1 January 2026 &amp;nbsp;|&amp;nbsp; CoreLayer AI Security, Chennai, India</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin-bottom:8px;">1. Information We Collect</h3>
+      <p>When you interact with CoreLayer AI Security through our website, we may collect information you voluntarily provide — such as your name, business email address, company name, and phone number — when you contact us via email or any enquiry form. We do not operate any automated data collection systems on this website beyond standard web server logs.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">2. How We Use Your Information</h3>
+      <p>Information you share with us is used solely to respond to your enquiry, provide information about our products and services, and for legitimate business communication purposes. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">3. CoreLayer Platform — Zero Data Architecture</h3>
+      <p>CoreLayer's products — including CoreLayer SecureAgent — are designed on a zero data collection principle. Prompt content and sensitive data processed by our platform tools run entirely locally and are never transmitted to CoreLayer's servers. This is a core architectural guarantee, not a policy that can be changed by a configuration update.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">4. Data Retention</h3>
+      <p>We retain business correspondence and contact information for as long as necessary to fulfil the purposes for which it was collected, or as required by applicable law. You may request deletion of your information at any time by contacting us at <a href="mailto:sales@corelayersecurity.ai" style="color:#00C8E8;">sales@corelayersecurity.ai</a>.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">5. Cookies</h3>
+      <p>This website does not use tracking cookies or third-party analytics tools. Standard web server access logs may record IP addresses and browser information for security and operational purposes only.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">6. Your Rights</h3>
+      <p>Depending on your jurisdiction, you may have rights under applicable data protection law — including GDPR, India's Digital Personal Data Protection Act (DPDP), or other frameworks — to access, correct, or delete personal data we hold about you. To exercise any such right, contact us at <a href="mailto:sales@corelayersecurity.ai" style="color:#00C8E8;">sales@corelayersecurity.ai</a>.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">7. Contact</h3>
+      <p>For any privacy-related questions, write to us at <a href="mailto:sales@corelayersecurity.ai" style="color:#00C8E8;">sales@corelayersecurity.ai</a>. CoreLayer AI Security is headquartered in Chennai, India.</p>
+    `
+  },
+  terms: {
+    title: "Terms of Use",
+    body: `
+      <p style="color:#8BAED4;font-size:12px;margin-bottom:24px;">Effective Date: 1 January 2026 &amp;nbsp;|&amp;nbsp; CoreLayer AI Security, Chennai, India</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin-bottom:8px;">1. Acceptance of Terms</h3>
+      <p>By accessing or using the CoreLayer AI Security website (corelayersecurity.ai), you agree to be bound by these Terms of Use. If you do not agree to these terms, please discontinue use of this website.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">2. Use of This Website</h3>
+      <p>This website is provided for informational purposes about CoreLayer AI Security's products, services, and company. You may access and use this website for lawful purposes only. You agree not to use this site in any manner that could damage, disable, or impair the site or interfere with any other party's use of the site.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">3. Intellectual Property</h3>
+      <p>All content on this website — including text, graphics, logos, product names, and software descriptions — is the property of CoreLayer AI Security and is protected by applicable intellectual property laws. The CoreLayer name, logo, and all product names (Radar, Striker, Vault, Shield, SecureAgent) are trademarks of CoreLayer AI Security. Unauthorised reproduction or use is prohibited.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">4. No Warranty</h3>
+      <p>This website and its content are provided on an "as is" basis without warranties of any kind, express or implied. CoreLayer AI Security does not warrant that the website will be uninterrupted, error-free, or free of harmful components.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">5. Limitation of Liability</h3>
+      <p>To the fullest extent permitted by law, CoreLayer AI Security shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of, or inability to use, this website or its content.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">6. Third-Party Links</h3>
+      <p>This website may contain links to third-party websites. CoreLayer AI Security is not responsible for the content, privacy practices, or terms of any third-party site. Links are provided for convenience only and do not constitute endorsement.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">7. Governing Law</h3>
+      <p>These Terms of Use are governed by the laws of India. Any disputes arising in connection with these terms shall be subject to the exclusive jurisdiction of the courts of Chennai, Tamil Nadu, India.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">8. Changes to These Terms</h3>
+      <p>CoreLayer AI Security reserves the right to update these Terms of Use at any time. Continued use of the website following any update constitutes acceptance of the revised terms.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">9. Contact</h3>
+      <p>For questions regarding these terms, contact us at <a href="mailto:sales@corelayersecurity.ai" style="color:#00C8E8;">sales@corelayersecurity.ai</a>.</p>
+    `
+  },
+  security: {
+    title: "Security",
+    body: `
+      <p style="color:#8BAED4;font-size:12px;margin-bottom:24px;">CoreLayer AI Security — Security Posture &amp; Responsible Disclosure</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin-bottom:8px;">Our Security Commitment</h3>
+      <p>Security is not a feature we add to CoreLayer — it is what CoreLayer is built on. We hold ourselves to the same standards we set for our customers. Our platform, our infrastructure, and our development practices are designed to be secure by default at every layer.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">Platform Security Architecture</h3>
+      <p>CoreLayer's products are architected on zero-trust and local-first principles. CoreLayer SecureAgent processes all sensitive data on-device with zero data transmitted to external servers. CoreLayer Shield policies are defined as code, version-controlled, and deployed through the same CI/CD pipeline as application code. All CoreLayer platform components support deployment in fully air-gapped, on-premise environments with no cloud dependency.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">Development Security Practices</h3>
+      <p>Our engineering team applies security-first development practices across every product: static analysis at the Build phase using CoreLayer Radar, adversarial testing using CoreLayer Striker, and runtime behaviour monitoring using CoreLayer Shield — the same tools we ship to customers.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">Responsible Disclosure</h3>
+      <p>CoreLayer AI Security supports responsible disclosure of security vulnerabilities. Our founding team has a track record of responsible disclosure to organisations including Google's Android Security Team, the United Nations, the World Health Organization, IRCTC, and the Berlin Government.</p>
+      <p style="margin-top:12px;">If you discover a security vulnerability in any CoreLayer product or on our website, please report it to us at <a href="mailto:sales@corelayersecurity.ai?subject=Security Vulnerability Disclosure" style="color:#00C8E8;">sales@corelayersecurity.ai</a> with the subject line <em>"Security Vulnerability Disclosure"</em>. We commit to acknowledging receipt within 48 hours and providing a remediation timeline within 7 business days.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">Website Security</h3>
+      <p>The CoreLayer website is served over HTTPS with TLS encryption. We do not use tracking scripts, third-party advertising networks, or data brokers. No sensitive customer data is processed or stored on this website.</p>
+      <h3 style="font-size:15px;font-weight:700;color:#F0F4FF;margin:20px 0 8px;">Contact</h3>
+      <p>For security-related enquiries, contact us at <a href="mailto:sales@corelayersecurity.ai" style="color:#00C8E8;">sales@corelayersecurity.ai</a>.</p>
+    `
+  }
+};
+
+function openModal(type) {
+  const data = modalContent[type];
+  document.getElementById('modal-title').textContent = data.title;
+  document.getElementById('modal-body').innerHTML = data.body;
+  document.getElementById('modal-overlay').style.display = 'block';
+  const box = document.getElementById('modal-box');
+  box.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').style.display = 'none';
+  document.getElementById('modal-box').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
 
 <script>
 // Active module nav on scroll
