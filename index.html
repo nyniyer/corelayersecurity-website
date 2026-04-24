@@ -558,6 +558,7 @@ footer { background: #060D1A; border-top: 1px solid var(--border); padding: 80px
 
 <!-- HERO -->
 <section id="home">
+  <canvas id="particle-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.7;"></canvas>
   <div class="hero-grid-bg"></div>
   <div class="tri-bg">
     <div class="tri tri-1"></div>
@@ -581,6 +582,21 @@ footer { background: #060D1A; border-top: 1px solid var(--border); padding: 80px
     <h1 class="hero-title">
       Securing AI <span class="hl">Workflows</span> at Every <span class="hl2">Layer</span> of the Lifecycle
     </h1>
+
+    <!-- Dynamic cycling line -->
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px;margin-top:4px;flex-wrap:wrap;">
+      <span style="font-size:26px;font-weight:600;color:var(--slate);">Layers of Trust for AI —</span>
+      <span id="dynamic-word" style="
+        font-size:30px;font-weight:800;
+        font-family:var(--mono);
+        letter-spacing:-0.02em;
+        min-width:160px;
+        display:inline-block;
+        background:linear-gradient(135deg,var(--cyan),var(--teal));
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        transition:opacity 0.3s ease;
+      ">Build</span>
+    </div>
     <p class="hero-subtitle">
       As enterprises deploy LLMs, copilots, RAG pipelines, and autonomous agents, CoreLayer AI Security is the only platform that secures every phase — from build time to end-user interaction — in a single, unified intelligence suite. At the <span style="color:var(--cyan);font-weight:600;">Build</span> phase, we scan prompts and templates before a single line ships. At <span style="color:var(--lavender);font-weight:600;">Test</span>, we simulate 2,000+ adversarial attacks. At <span style="color:var(--teal);font-weight:600;">Validate</span>, we secure your RAG pipelines and guardrails. At <span style="color:#ff7a5c;font-weight:600;">Runtime</span>, we enforce live inference protection. And at the <span style="color:var(--slate);font-weight:600;">End User</span> layer, we mask sensitive data before it ever reaches an LLM.
     </p>
@@ -1479,5 +1495,115 @@ window.addEventListener('load', () => {
   countUp('cnt-rules', 9, '+', 1000);
 });
 </script>
+<!-- DYNAMIC WORD CYCLE -->
+<script>
+(function() {
+  const words = ['Build', 'Test', 'Validate', 'Protect'];
+  const colors = [
+    'linear-gradient(135deg,#00C8E8,#00E5C8)',
+    'linear-gradient(135deg,#B8A4FF,#7B5EF8)',
+    'linear-gradient(135deg,#00E5C8,#00C8E8)',
+    'linear-gradient(135deg,#ff7a5c,#FF8A50)'
+  ];
+  const el = document.getElementById('dynamic-word');
+  let i = 0;
+  setInterval(() => {
+    el.style.opacity = '0';
+    setTimeout(() => {
+      i = (i + 1) % words.length;
+      el.textContent = words[i];
+      el.style.backgroundImage = colors[i];
+      el.style.opacity = '1';
+    }, 300);
+  }, 2000);
+})();
+</script>
+
+</body>
+<script>
+(function() {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let W, H, cx, cy;
+  const particles = [];
+
+  const RING_DEFS = [
+    { radiusFactor: 0.13, count: 28,  size: 2.2, color: 'rgba(0,200,232,',  alpha: 0.9,  speed:  0.0006 },
+    { radiusFactor: 0.22, count: 44,  size: 2.0, color: 'rgba(0,229,200,',  alpha: 0.75, speed: -0.0004 },
+    { radiusFactor: 0.32, count: 62,  size: 1.8, color: 'rgba(0,200,232,',  alpha: 0.6,  speed:  0.0003 },
+    { radiusFactor: 0.43, count: 80,  size: 1.5, color: 'rgba(184,164,255,',alpha: 0.5,  speed: -0.00022},
+    { radiusFactor: 0.54, count: 100, size: 1.2, color: 'rgba(0,229,200,',  alpha: 0.35, speed:  0.00016},
+    { radiusFactor: 0.65, count: 120, size: 1.0, color: 'rgba(0,200,232,',  alpha: 0.2,  speed: -0.00012},
+  ];
+
+  function resize() {
+    const section = canvas.parentElement;
+    W = canvas.width  = section.offsetWidth;
+    H = canvas.height = section.offsetHeight;
+    cx = W * 0.70;
+    cy = H * 0.50;
+    buildParticles();
+  }
+
+  function buildParticles() {
+    particles.length = 0;
+    RING_DEFS.forEach(ring => {
+      const r = Math.min(W, H) * ring.radiusFactor;
+      for (let i = 0; i < ring.count; i++) {
+        const angle = (i / ring.count) * Math.PI * 2;
+        particles.push({
+          angle,
+          radius:    r,
+          speed:     ring.speed,
+          size:      ring.size,
+          color:     ring.color,
+          baseAlpha: ring.alpha,
+          alpha:     ring.alpha,
+          flicker:   0.003 + Math.random() * 0.005,
+          phase:     Math.random() * Math.PI * 2
+        });
+      }
+    });
+  }
+
+  let t = 0;
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    t += 1;
+
+    // Draw faint ring guides
+    RING_DEFS.forEach(ring => {
+      const r = Math.min(W, H) * ring.radiusFactor;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(0,200,232,0.05)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    for (const p of particles) {
+      p.angle += p.speed;
+      p.alpha = p.baseAlpha + Math.sin(t * p.flicker + p.phase) * (p.baseAlpha * 0.35);
+      p.alpha = Math.max(0.05, Math.min(1, p.alpha));
+
+      const x = cx + Math.cos(p.angle) * p.radius;
+      const y = cy + Math.sin(p.angle) * p.radius;
+
+      ctx.beginPath();
+      ctx.arc(x, y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + p.alpha + ')';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  animate();
+})();
+</script>
+
 </body>
 </html>
