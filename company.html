@@ -245,6 +245,7 @@ footer { background: #060D1A; border-top: 1px solid var(--border); padding: 60px
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
   .nav-links { display: none; }
+  .hamburger { display: flex; }
   section { padding: 60px 24px; }
   .company-hero { padding: 100px 24px 40px; }
   .team-grid { grid-template-columns: 1fr; }
@@ -254,6 +255,75 @@ footer { background: #060D1A; border-top: 1px solid var(--border); padding: 60px
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
   footer { padding: 48px 24px 28px; }
 }
+
+/* HAMBURGER MENU */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px; height: 36px;
+  cursor: pointer;
+  background: none; border: none;
+  padding: 4px;
+  z-index: 1100;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block; height: 2px; width: 100%;
+  background: var(--off-white);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* MOBILE DRAWER */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  background: rgba(11,21,37,0.98);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  z-index: 999;
+  flex-direction: column;
+  padding: 16px 24px 24px;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.mobile-nav.open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+.mobile-nav a {
+  font-size: 16px; font-weight: 500;
+  color: var(--slate);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  text-decoration: none;
+  transition: color 0.2s;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.mobile-nav a::after { content: '→'; font-size: 14px; opacity: 0.4; }
+.mobile-nav a:hover { color: var(--cyan); }
+.mobile-nav a.active { color: var(--cyan); }
+.mobile-nav a:last-child { border-bottom: none; }
+.mobile-nav .mobile-cta {
+  margin-top: 16px;
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  color: var(--midnight) !important;
+  font-weight: 700 !important;
+  padding: 14px 20px !important;
+  border-radius: 10px;
+  text-align: center;
+  justify-content: center;
+}
+.mobile-nav .mobile-cta::after { display: none; }
 </style>
 </head>
 <body>
@@ -271,7 +341,21 @@ footer { background: #060D1A; border-top: 1px solid var(--border); padding: 60px
     <a href="company.html" class="active">Company</a>
     <a href="mailto:sales@corelayersecurity.ai?subject=Enquiry — CoreLayer AI Security" class="nav-cta">Contact Us</a>
   </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 </nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html" class="">Home</a>
+  <a href="product.html" class="">Product</a>
+  <a href="services.html" class="">Services</a>
+  <a href="company.html" class="active">Company</a>
+  <a href="mailto:sales@corelayersecurity.ai?subject=Enquiry — CoreLayer AI Security" class="mobile-cta">Contact Us</a>
+</div>
 
 <!-- HERO -->
 <div class="company-hero">
@@ -691,6 +775,42 @@ function closeModal() {
 }
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobile-nav');
+if (hamburger && mobileNav) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    if (mobileNav.classList.contains('open')) {
+      mobileNav.style.opacity = '0';
+      mobileNav.style.transform = 'translateY(-10px)';
+      setTimeout(() => { mobileNav.classList.remove('open'); }, 250);
+    } else {
+      mobileNav.classList.add('open');
+      requestAnimationFrame(() => {
+        mobileNav.style.opacity = '1';
+        mobileNav.style.transform = 'translateY(0)';
+      });
+    }
+  });
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    }
+  });
+  // Close on nav link click
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    });
+  });
+}
 </script>
 
 </body>
